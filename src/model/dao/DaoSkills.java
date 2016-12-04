@@ -10,15 +10,14 @@ import java.util.List;
 
 public class DaoSkills<Skill> implements DAO<Skill> {
 
-
     @Override
-    public Skill create(Skill skill) {
-        return null;
+    public void create(Skill skill) {
+
     }
 
     @Override
-    public List<Skill> get(long id) {
-        return null;
+    public int get(long id) {
+        return 0;
     }
 
     @Override
@@ -28,6 +27,6 @@ public class DaoSkills<Skill> implements DAO<Skill> {
 
     @Override
     public int delete(long id) {
-
+        return 0;
     }
 }
