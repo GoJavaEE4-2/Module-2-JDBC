@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * Created by Vlad on 04.12.2016.
  */
-public interface Customers {
+public interface CustomersDao {
     public Customer create();
 
     public Customer read(int id);
