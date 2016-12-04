@@ -2,12 +2,14 @@ package model.dao;
 
 import model.entities.Customer;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by Vlad on 04.12.2016.
  */
 public class CustomersDAOImpl<T> implements CustomersDAO<T>{
+    List<T>customersList=new ArrayList<T>();
     @Override
     public void create(T t) {
 
@@ -15,7 +17,7 @@ public class CustomersDAOImpl<T> implements CustomersDAO<T>{
 
     @Override
     public T get(int id) {
-        return null;
+        return customersList.get(id);
     }
 
     @Override
