@@ -8,8 +8,8 @@ import java.util.List;
  */
 public interface DAO<T>{
     void create(T t);
-    void get(long id);
+    int get(long id);
     void update(T t);
-    void delete(long id);
+    int delete(long id);
 
 }
