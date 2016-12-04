@@ -2,28 +2,28 @@ package model;
 
 public class Customer {
 
-    private Integer customer_id;
-    private String customer_name;
+    private int customerID;
+    private String customerName;
 
-    public Customer(Integer customer_id, String customer_name) {
-        this.customer_id = customer_id;
-        this.customer_name = customer_name;
+    public Customer(int customerID, String customerName) {
+        this.customerID = customerID;
+        this.customerName = customerName;
     }
 
-    public Integer getCustomer_id() {
-        return customer_id;
+    public int getCustomerID() {
+        return customerID;
     }
 
-    public void setCustomer_id(Integer customer_id) {
-        this.customer_id = customer_id;
+    public void setCustomerID(int customerID) {
+        this.customerID = customerID;
     }
 
-    public String getCustomer_name() {
-        return customer_name;
+    public String getCustomerName() {
+        return customerName;
     }
 
-    public void setCustomer_name(String customer_name) {
-        this.customer_name = customer_name;
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
     }
 }
 
