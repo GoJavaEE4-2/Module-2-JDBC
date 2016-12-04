@@ -4,27 +4,27 @@ package model.entities;
  * Created by Vlad on 04.12.2016.
  */
 public class Company {
-    private int companieID;
-    private String companieName;
+    private int companyID;
+    private String companyName;
 
-    public Company(int companieID, String companieName) {
-        this.companieID = companieID;
-        this.companieName = companieName;
+    public Company(int companyID, String companyName) {
+        this.companyID = companyID;
+        this.companyName = companyName;
     }
 
-    public int getCompanieID() {
-        return companieID;
+    public int getCompanyID() {
+        return companyID;
     }
 
-    public void setCompanieID(int companieID) {
-        this.companieID = companieID;
+    public void setCompanyID(int companyID) {
+        this.companyID = companyID;
     }
 
-    public String getCompanieName() {
-        return companieName;
+    public String getCompanyName() {
+        return companyName;
     }
 
-    public void setCompanieName(String companieName) {
-        this.companieName = companieName;
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
     }
 }
