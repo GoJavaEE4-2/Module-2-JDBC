@@ -1,4 +1,6 @@
-package model;
+package model.dao;
+
+import model.entities.Customer;
 
 import java.util.List;
 

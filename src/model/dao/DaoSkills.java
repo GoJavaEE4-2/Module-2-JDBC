@@ -1,4 +1,6 @@
-package model;
+package model.dao;
+
+
 
 import java.util.List;
 
@@ -21,7 +23,7 @@ public class DaoSkills implements DAO<Skill> {
     }
 
     @Override
-    public void delete(long id) {
+    public int delete(long id) {
 
     }
 }

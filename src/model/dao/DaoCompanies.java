@@ -1,5 +1,5 @@
-package model;
+package model.dao;;
 
-public class DaoCompanies implements Dao {
+public class DaoCompanies<T> implements DAO<T> {
 
 }
