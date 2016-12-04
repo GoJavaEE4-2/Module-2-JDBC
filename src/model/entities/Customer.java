@@ -1,21 +1,21 @@
-package model;
+package model.entities;
 
 public class Customer {
 
-    private int customerID;
+    private int customerId;
     private String customerName;
 
-    public Customer(int customerID, String customerName) {
-        this.customerID = customerID;
+    public Customer(int customerId, String customerName) {
+        this.customerId = customerId;
         this.customerName = customerName;
     }
 
-    public int getCustomerID() {
-        return customerID;
+    public int getCustomerId() {
+        return customerId;
     }
 
-    public void setCustomerID(int customerID) {
-        this.customerID = customerID;
+    public void setCustomerId(int customerId) {
+        this.customerId = customerId;
     }
 
     public String getCustomerName() {
