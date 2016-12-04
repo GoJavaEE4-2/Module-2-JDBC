@@ -2,7 +2,7 @@ package model;
 
 import java.util.List;
 
-public class DaoSkills implements GenericDao<Skill> {
+public class DaoSkills implements DAO<Skill> {
 
 
     @Override
