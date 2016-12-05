@@ -6,14 +6,16 @@ public class Project {
 
     private int projectID;
     private String projectName;
-    private Date projectTimestamp;
-    private double projectCost;
+    private int projectCompanyId;
+    private int projectCustomerId;
+    private Date projectTimeStamp;
 
-    public Project(int projectID, String projectName, Date projectTimestamp, double projectCost) {
+    public Project(int projectID, String projectName, int projectCompanyId, int projectCustomerId, Date projectTimeStamp) {
         this.projectID = projectID;
         this.projectName = projectName;
-        this.projectTimestamp = projectTimestamp;
-        this.projectCost = projectCost;
+        this.projectCompanyId = projectCompanyId;
+        this.projectCustomerId = projectCustomerId;
+        this.projectTimeStamp = projectTimeStamp;
     }
 
     public int getProjectID() {
@@ -32,19 +34,27 @@ public class Project {
         this.projectName = projectName;
     }
 
-    public Date getProjectTimestamp() {
-        return projectTimestamp;
+    public int getProjectCompanyId() {
+        return projectCompanyId;
     }
 
-    public void setProjectTimestamp(Date projectTimestamp) {
-        this.projectTimestamp = projectTimestamp;
+    public void setProjectCompanyId(int projectCompanyId) {
+        this.projectCompanyId = projectCompanyId;
     }
 
-    public double getProjectCost() {
-        return projectCost;
+    public int getProjectCustomerId() {
+        return projectCustomerId;
     }
 
-    public void setProjectCost(double projectCost) {
-        this.projectCost = projectCost;
+    public void setProjectCustomerId(int projectCustomerId) {
+        this.projectCustomerId = projectCustomerId;
+    }
+
+    public Date getProjectTimeStamp() {
+        return projectTimeStamp;
+    }
+
+    public void setProjectTimeStamp(Date projectTimeStamp) {
+        this.projectTimeStamp = projectTimeStamp;
     }
 }
