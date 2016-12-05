@@ -9,25 +9,25 @@ import java.util.List;
  * Created by Vlad on 04.12.2016.
  */
 public class CustomersDAOImpl<T> implements CustomersDAO<T>{
-    List<T>customersList=new ArrayList<T>();
+
     @Override
     public void create(T t) {
-
     }
 
     @Override
     public T get(int id) {
-        return customersList.get(id);
+        return null;
     }
 
     @Override
     public void update(T t) {
 
+
     }
 
     @Override
     public void delete(int id) {
-        customersList.remove(id);
+
     }
 
     @Override

@@ -10,7 +10,7 @@ import java.util.List;
  * Created by Vlad on 04.12.2016.
  */
 public class DevelopersDAOImpl<T> implements DevelopersDAO<T>{
-    List<T>developerslist=new ArrayList<T>();
+
     @Override
     public void create(T t) {
         
@@ -18,7 +18,7 @@ public class DevelopersDAOImpl<T> implements DevelopersDAO<T>{
 
     @Override
     public T get(int id) {
-        return developerslist.get(id);
+        return null;
     }
 
     @Override
@@ -27,7 +27,7 @@ public class DevelopersDAOImpl<T> implements DevelopersDAO<T>{
 
     @Override
     public void delete(int id) {
-    developerslist.remove(id);
+
     }
 
     @Override
