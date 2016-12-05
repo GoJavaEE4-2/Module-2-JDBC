@@ -1,5 +1,8 @@
 package model.dao;
 
+
+import model.entities.Developer;
+
 import java.util.List;
 
 /**
@@ -8,16 +11,11 @@ import java.util.List;
 public class DevelopersDAOImpl<T> implements DevelopersDAO<T>{
     @Override
     public void create(T t) {
-
+        
     }
 
     @Override
     public T get(int id) {
-        return null;
-    }
-
-    @Override
-    public Developer create() {
         return null;
     }
 
@@ -29,6 +27,11 @@ public class DevelopersDAOImpl<T> implements DevelopersDAO<T>{
     @Override
     public void delete(int id) {
 
+    }
+
+    @Override
+    public Developer create() {
+        return null;
     }
 
     @Override
