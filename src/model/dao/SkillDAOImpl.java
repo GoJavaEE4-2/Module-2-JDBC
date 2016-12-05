@@ -3,21 +3,23 @@ package model.dao;
 
 import java.util.List;
 
-public class SkillDAOImpl<Skill> implements SkillDAO {
+public class SkillDAOImpl<Skill> implements SkillDAO<Skill> {
+
+
 
 
     @Override
-    public void create(Object o) {
+    public void create(Skill skill) {
 
     }
 
     @Override
-    public Object get(int id) {
+    public Skill get(int id) {
         return null;
     }
 
     @Override
-    public void update(Object o) {
+    public void update(Skill skill) {
 
     }
 
@@ -32,7 +34,7 @@ public class SkillDAOImpl<Skill> implements SkillDAO {
     }
 
     @Override
-    public List<model.entities.Skill> getAll() {
+    public List<Skill> getAll() {
         return null;
     }
 }
