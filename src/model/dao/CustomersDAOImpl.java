@@ -27,7 +27,7 @@ public class CustomersDAOImpl<T> implements CustomersDAO<T>{
 
     @Override
     public void delete(int id) {
-
+        customersList.remove(id);
     }
 
     @Override
