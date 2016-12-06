@@ -103,6 +103,18 @@ public class SkillDAOImpl implements SkillDAO<Skill> {
 
     @Override
     public void delete(int id) {
+        try {
+            ConnectionToDatabase();
+            preparedStatement = connection.prepareStatement(sqlDelete);
+            preparedStatement.setInt(1, id);
+            preparedStatement.executeUpdate();
+            preparedStatement.close();
+            closeConnection();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
 
     }
 
