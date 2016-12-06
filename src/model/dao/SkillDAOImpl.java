@@ -36,14 +36,13 @@ public class SkillDAOImpl<Skill> implements SkillDAO<Skill> {
 
     @Override
     public void create(Skill skill) {
-
         try {
             ConnectDB();
             preparedStatement = connection.prepareStatement(sqlCreate);
             preparedStatement.setString(1, skill.toString());
-
             preparedStatement.executeUpdate();
             preparedStatement.close();
+            closeConnection();
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
