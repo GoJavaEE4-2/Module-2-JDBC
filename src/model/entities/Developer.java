@@ -6,6 +6,14 @@ import java.util.Date;
 
 public class Developer {
 
+    public Developer(int developerId, String developerName, Company developerCompanyId, Project developerProjectId, Date developerJoinDate) {
+        this.developerId = developerId;
+        this.developerName = developerName;
+        this.developerCompanyId = developerCompanyId;
+        this.developerProjectId = developerProjectId;
+        this.developerJoinDate = developerJoinDate;
+    }
+
     private int developerId ;
     private String developerName;
     private Company  developerCompanyId;
