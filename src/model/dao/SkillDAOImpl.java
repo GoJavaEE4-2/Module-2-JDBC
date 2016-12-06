@@ -1,8 +1,5 @@
 package model.dao;
-
-
 import model.entities.Skill;
-
 import java.sql.*;
 import java.util.List;
 import java.sql.Connection;
@@ -16,14 +13,13 @@ public class SkillDAOImpl implements SkillDAO<Skill> {
     public static Statement statement = null;
     public static PreparedStatement preparedStatement = null;
 
-
     String sqlStartTransaction = "START TRANSACTION";
     String commit = "COMMIT";
     String sqlCreate = "insert into skills (skill_name) VALUES (?)";
     String sqlGet = "select * from SKILLS where skill_id = ?";
     String sqlUpdate = "update skills set skill_name = ?";
     String sqlDelete = "delete from SKILLS where skill_id = ?";
-    String sqlFindByName = "select skill_name from SKILLS where skill_name LIKE ?";
+    String sqlFindByName = "select skill_name from SKILLS where skill_name = ?";
     String sqlGetAll = "select * from SKILLS";
 
     public static void ConnectionToDatabase() throws SQLException, ClassNotFoundException {
@@ -120,11 +116,29 @@ public class SkillDAOImpl implements SkillDAO<Skill> {
 
     @Override
     public String findByName(String name) {
-        return null;
+        String resultName = "";
+        try {
+            ConnectionToDatabase();
+            preparedStatement = connection.prepareStatement(sqlFindByName);
+            preparedStatement.setString(1, name);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+                resultName = resultSet.getString("skill_name");
+            }
+            preparedStatement.close();
+            closeConnection();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return resultName;
     }
 
     @Override
     public List<Skill> getAll() {
+        
         return null;
     }
 }
