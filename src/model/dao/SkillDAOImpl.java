@@ -1,17 +1,32 @@
 package model.dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.List;
 
 public class SkillDAOImpl<Skill> implements SkillDAO<Skill> {
 
-    public static final String JDBC_DRIVER = "org.postgresql.Driver";
-    public static final String DATABASE_URL = "jdbc:postgresql://localhost:5432/postgres";
+    public static final String DRIVER = "org.postgresql.Driver";
+    public static final String URL = "jdbc:postgresql://localhost:5432/postgres";
     public static Connection connection = null;
     public static Statement statement = null;
     public static PreparedStatement preparedStatement = null;
+
+    String sqlStartTransaction = "START TRANSACTION";
+    String commit = "COMMIT";
+    String sqlCreate = "insert into skills (skill_name) VALUES (?)";
+    String sqlGet = "select skill_name from SKILLS where skill_id = ?";
+    String sqlUpdate = "update skills set skill_name = ?";
+    String sqlDelete = "";
+    String sqlFindByName = "";
+    String sqlGetAll = "";
+
+    public static void ConnectDB() throws SQLException, ClassNotFoundException {
+        Class.forName(DRIVER);
+        Connection connection = DriverManager.getConnection(URL, System.getProperty("User"), System.getProperty("Password"));
+
+    }
+
+
 
 
 
