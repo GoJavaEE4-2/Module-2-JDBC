@@ -16,9 +16,9 @@ public class SkillDAOImpl<Skill> implements SkillDAO<Skill> {
     String sqlCreate = "insert into skills (skill_name) VALUES (?)";
     String sqlGet = "select skill_name from SKILLS where skill_id = ?";
     String sqlUpdate = "update skills set skill_name = ?";
-    String sqlDelete = "";
-    String sqlFindByName = "";
-    String sqlGetAll = "";
+    String sqlDelete = "delete from SKILLS where skill_id = ?";
+    String sqlFindByName = "select skill_name from SKILLS where skill_name LIKE ?";
+    String sqlGetAll = "select * from SKILLS";
 
     public static void ConnectDB() throws SQLException, ClassNotFoundException {
         Class.forName(DRIVER);
