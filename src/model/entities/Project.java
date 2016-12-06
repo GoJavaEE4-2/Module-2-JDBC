@@ -10,6 +10,13 @@ public class Project {
     private int projectCustomerId;
     private Date projectTimeStamp;
 
+    public Project(String projectName, int projectCompanyId, int projectCustomerId, Date projectTimeStamp) {
+        this.projectName = projectName;
+        this.projectCompanyId = projectCompanyId;
+        this.projectCustomerId = projectCustomerId;
+        this.projectTimeStamp = projectTimeStamp;
+    }
+
     public Project(int projectID, String projectName, int projectCompanyId, int projectCustomerId, Date projectTimeStamp) {
         this.projectId = projectID;
         this.projectName = projectName;
