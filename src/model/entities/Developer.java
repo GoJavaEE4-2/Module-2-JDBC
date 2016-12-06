@@ -1,10 +1,18 @@
 package model.entities;
+
 import java.util.Date;
+
 /**
  * Created by asevruk on 12/5/2016.
  */
 
 public class Developer {
+
+    private int developerId;
+    private String developerName;
+    private Company developerCompanyId;
+    private Project developerProjectId;
+    private Date developerJoinDate;
 
     public Developer(int developerId, String developerName, Company developerCompanyId, Project developerProjectId, Date developerJoinDate) {
         this.developerId = developerId;
@@ -13,13 +21,6 @@ public class Developer {
         this.developerProjectId = developerProjectId;
         this.developerJoinDate = developerJoinDate;
     }
-
-    private int developerId ;
-    private String developerName;
-    private Company  developerCompanyId;
-    private Project developerProjectId;
-    private Date developerJoinDate;
-
 
     @Override
     public String toString() {
@@ -71,7 +72,6 @@ public class Developer {
     public void setDeveloperJoinDate(Date developerJoinDate) {
         this.developerJoinDate = developerJoinDate;
     }
-
 
 
 }
