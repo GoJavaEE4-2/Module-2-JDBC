@@ -1,9 +1,10 @@
 package model.dao;
+
 import model.entities.Skill;
+
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
-import java.sql.Connection;
-import java.sql.DriverManager;
 
 public class SkillDAOImpl implements SkillDAO<Skill> {
 
@@ -55,7 +56,7 @@ public class SkillDAOImpl implements SkillDAO<Skill> {
 
 
         String resultName = "";
-        Skill skill = new Skill(id,resultName);
+        Skill skill = new Skill(id, resultName);
         try {
             ConnectionToDatabase();
             preparedStatement = connection.prepareStatement(sqlGet);
@@ -64,7 +65,7 @@ public class SkillDAOImpl implements SkillDAO<Skill> {
             while (resultSet.next()) {
                 id = resultSet.getInt("skill_id");
                 resultName = resultSet.getString("skill_name");
-                  }
+            }
 
             skill.setSkillId(id);
             skill.setSkillName(resultName);
@@ -122,7 +123,7 @@ public class SkillDAOImpl implements SkillDAO<Skill> {
             preparedStatement = connection.prepareStatement(sqlFindByName);
             preparedStatement.setString(1, name);
             ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()){
+            while (resultSet.next()) {
                 resultName = resultSet.getString("skill_name");
             }
             preparedStatement.close();
@@ -138,7 +139,21 @@ public class SkillDAOImpl implements SkillDAO<Skill> {
 
     @Override
     public List<Skill> getAll() {
-        
-        return null;
+        List<Skill> skills = new ArrayList<>();
+        try {
+
+
+            ConnectionToDatabase();
+            preparedStatement = connection.prepareStatement(sqlGetAll);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                skills.add(new Skill(resultSet.getInt("skill_id"), resultSet.getString("skill_name")));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return skills;
     }
 }
