@@ -86,6 +86,18 @@ public class SkillDAOImpl implements SkillDAO<Skill> {
 
     @Override
     public void update(Skill skill) {
+        try {
+            ConnectionToDatabase();
+            preparedStatement = connection.prepareStatement(sqlUpdate);
+            preparedStatement.setString(1, skill.getSkillName());
+            preparedStatement.executeUpdate();
+            preparedStatement.close();
+            closeConnection();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
 
     }
 
