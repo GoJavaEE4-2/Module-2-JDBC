@@ -1,23 +1,25 @@
 package model.entities;
 
-/**
- * Created by Vlad on 04.12.2016.
- */
+
 public class Skill {
-    private int skillID;
+    private int skillId;
     private String skillName;
 
-    public Skill(int skillID, String skillName) {
-        this.skillID = skillID;
+    public Skill(String skillName) {
         this.skillName = skillName;
     }
 
-    public int getSkillID() {
-        return skillID;
+    public Skill(int skillId, String skillName) {
+        this.skillId = skillId;
+        this.skillName = skillName;
     }
 
-    public void setSkillID(int skillID) {
-        this.skillID = skillID;
+    public int getskillId() {
+        return skillId;
+    }
+
+    public void setskillId(int skillId) {
+        this.skillId = skillId;
     }
 
     public String getSkillName() {
