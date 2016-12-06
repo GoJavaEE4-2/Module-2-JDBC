@@ -2,10 +2,6 @@ package model.entities;
 
 import java.util.Date;
 
-/**
- * Created by asevruk on 12/5/2016.
- */
-
 public class Developer {
 
     private int developerId;
@@ -13,6 +9,13 @@ public class Developer {
     private Company developerCompanyId;
     private Project developerProjectId;
     private Date developerJoinDate;
+
+    public Developer(String developerName, Company developerCompanyId, Project developerProjectId, Date developerJoinDate) {
+        this.developerName = developerName;
+        this.developerCompanyId = developerCompanyId;
+        this.developerProjectId = developerProjectId;
+        this.developerJoinDate = developerJoinDate;
+    }
 
     public Developer(int developerId, String developerName, Company developerCompanyId, Project developerProjectId, Date developerJoinDate) {
         this.developerId = developerId;
