@@ -7,9 +7,10 @@ public class DaoCompanies<T> implements DAO<T> {
     }
 
     @Override
-    public int get(long id) {
-        return 0;
+    public T get(int id) {
+        return null;
     }
+
 
     @Override
     public void update(T t) {
@@ -17,7 +18,8 @@ public class DaoCompanies<T> implements DAO<T> {
     }
 
     @Override
-    public int delete(long id) {
-        return 0;
+    public void delete(int id) {
+
     }
+
 }

@@ -2,6 +2,8 @@ package model.dao;
 
 import java.sql.*;
 import java.util.List;
+import java.sql.Connection;
+import java.sql.DriverManager;
 
 public class SkillDAOImpl<Skill> implements SkillDAO<Skill> {
 
@@ -22,17 +24,31 @@ public class SkillDAOImpl<Skill> implements SkillDAO<Skill> {
 
     public static void ConnectDB() throws SQLException, ClassNotFoundException {
         Class.forName(DRIVER);
-        Connection connection = DriverManager.getConnection(URL, System.getProperty("User"), System.getProperty("Password"));
+        connection = DriverManager.getConnection(URL, "postgres", "parafin");
+
 
     }
 
-
-
+    public static void closeConnection() throws SQLException {
+        connection.close();
+    }
 
 
     @Override
     public void create(Skill skill) {
 
+        try {
+            ConnectDB();
+            preparedStatement = connection.prepareStatement(sqlCreate);
+            preparedStatement.setString(1, skill.toString());
+
+            preparedStatement.executeUpdate();
+            preparedStatement.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
