@@ -6,31 +6,31 @@ public class Project {
 
     private int projectId;
     private String projectName;
-    private int projectCompanyId;
-    private int projectCustomerId;
+    private Company projectCompanyId;
+    private Customer projectCustomerId;
     private Date projectTimeStamp;
 
-    public Project(String projectName, int projectCompanyId, int projectCustomerId, Date projectTimeStamp) {
+    public Project(String projectName, Company projectCompanyId, Customer projectCustomerId, Date projectTimeStamp) {
         this.projectName = projectName;
         this.projectCompanyId = projectCompanyId;
         this.projectCustomerId = projectCustomerId;
         this.projectTimeStamp = projectTimeStamp;
     }
 
-    public Project(int projectID, String projectName, int projectCompanyId, int projectCustomerId, Date projectTimeStamp) {
-        this.projectId = projectID;
+    public Project(int projectId, String projectName, Company projectCompanyId, Customer projectCustomerId, Date projectTimeStamp) {
+        this.projectId = projectId;
         this.projectName = projectName;
         this.projectCompanyId = projectCompanyId;
         this.projectCustomerId = projectCustomerId;
         this.projectTimeStamp = projectTimeStamp;
     }
 
-    public int getProjectID() {
+    public int getProjectId() {
         return projectId;
     }
 
-    public void setProjectID(int projectID) {
-        this.projectId = projectID;
+    public void setProjectId(int projectId) {
+        this.projectId = projectId;
     }
 
     public String getProjectName() {
@@ -41,19 +41,19 @@ public class Project {
         this.projectName = projectName;
     }
 
-    public int getProjectCompanyId() {
+    public Company getProjectCompanyId() {
         return projectCompanyId;
     }
 
-    public void setProjectCompanyId(int projectCompanyId) {
+    public void setProjectCompanyId(Company projectCompanyId) {
         this.projectCompanyId = projectCompanyId;
     }
 
-    public int getProjectCustomerId() {
+    public Customer getProjectCustomerId() {
         return projectCustomerId;
     }
 
-    public void setProjectCustomerId(int projectCustomerId) {
+    public void setProjectCustomerId(Customer projectCustomerId) {
         this.projectCustomerId = projectCustomerId;
     }
 
@@ -63,5 +63,16 @@ public class Project {
 
     public void setProjectTimeStamp(Date projectTimeStamp) {
         this.projectTimeStamp = projectTimeStamp;
+    }
+
+    @Override
+    public String toString() {
+        return "Project{" +
+                "projectId=" + projectId +
+                ", projectName='" + projectName + '\'' +
+                ", projectCompanyId=" + projectCompanyId +
+                ", projectCustomerId=" + projectCustomerId +
+                ", projectTimeStamp=" + projectTimeStamp +
+                '}';
     }
 }
