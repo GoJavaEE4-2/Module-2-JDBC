@@ -14,11 +14,11 @@ public class Skill {
         this.skillName = skillName;
     }
 
-    public int getskillId() {
+    public int getSkillId() {
         return skillId;
     }
 
-    public void setskillId(int skillId) {
+    public void setSkillId(int skillId) {
         this.skillId = skillId;
     }
 

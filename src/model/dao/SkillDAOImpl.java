@@ -1,13 +1,14 @@
 package model.dao;
 
-import model.entities.*;
+
+import model.entities.Skill;
 
 import java.sql.*;
 import java.util.List;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
-public class SkillDAOImpl<Skill> implements SkillDAO<Skill> {
+public class SkillDAOImpl implements SkillDAO<Skill> {
 
     public static final String DRIVER = "org.postgresql.Driver";
     public static final String URL = "jdbc:postgresql://localhost:5432/postgres";
@@ -54,20 +55,21 @@ public class SkillDAOImpl<Skill> implements SkillDAO<Skill> {
 
     @Override
     public Skill get(int id) {
-        model.entities.Skill skill = null;
-        Skill resultSkill = (Skill) skill;
-        int resultId = 0;
+
+
         String resultName = "";
+        Skill skill = new Skill(id,resultName);
         try {
             ConnectionToDatabase();
             preparedStatement = connection.prepareStatement(sqlGet);
             preparedStatement.setInt(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                resultId = resultSet.getInt("skillId");
-                resultName = resultSet.getString("skillName");
-            }
-            skill.setskillId(resultId);
+                id = resultSet.getInt("skill_id");
+                resultName = resultSet.getString("skill_name");
+                  }
+
+            skill.setSkillId(id);
             skill.setSkillName(resultName);
             preparedStatement.close();
             closeConnection();
@@ -78,7 +80,7 @@ public class SkillDAOImpl<Skill> implements SkillDAO<Skill> {
             e.printStackTrace();
         }
 
-        return resultSkill;
+        return skill;
     }
 
     @Override

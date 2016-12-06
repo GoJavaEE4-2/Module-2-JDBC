@@ -1,7 +1,4 @@
-package model.dao;;
-
-
-import java.util.List;
+package model.dao;
 
 /**
  * Created by Vlad on 04.12.2016.
