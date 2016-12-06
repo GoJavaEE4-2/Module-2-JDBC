@@ -3,14 +3,25 @@ import java.util.Date;
 /**
  * Created by asevruk on 12/5/2016.
  */
+
 public class Developer {
 
-    public Developer(int developerId, String developerName, int developerCompanyId, int developerProjectId, Date developerJoinDate) {
-        this.developerId = developerId;
-        this.developerName = developerName;
-        this.developerCompanyId = developerCompanyId;
-        this.developerProjectId = developerProjectId;
-        this.developerJoinDate = developerJoinDate;
+    private int developerId ;
+    private String developerName;
+    private Company  developerCompanyId;
+    private Project developerProjectId;
+    private Date developerJoinDate;
+
+
+    @Override
+    public String toString() {
+        return "Developer{" +
+                "developerId=" + developerId +
+                ", developerName='" + developerName + '\'' +
+                ", developerCompanyId=" + developerCompanyId +
+                ", developerProjectId=" + developerProjectId +
+                ", developerJoinDate=" + developerJoinDate +
+                '}';
     }
 
     public int getDeveloperId() {
@@ -29,19 +40,19 @@ public class Developer {
         this.developerName = developerName;
     }
 
-    public int getDeveloperCompanyId() {
+    public Company getDeveloperCompanyId() {
         return developerCompanyId;
     }
 
-    public void setDeveloperCompanyId(int developerCompanyId) {
+    public void setDeveloperCompanyId(Company developerCompanyId) {
         this.developerCompanyId = developerCompanyId;
     }
 
-    public int getDeveloperProjectId() {
+    public Project getDeveloperProjectId() {
         return developerProjectId;
     }
 
-    public void setDeveloperProjectId(int developerProjectId) {
+    public void setDeveloperProjectId(Project developerProjectId) {
         this.developerProjectId = developerProjectId;
     }
 
@@ -53,22 +64,6 @@ public class Developer {
         this.developerJoinDate = developerJoinDate;
     }
 
-    @Override
-    public String toString() {
-        return "Developer{" +
-                "developerId=" + developerId +
-                ", developerName='" + developerName + '\'' +
-                ", developerCompanyId=" + developerCompanyId +
-                ", developerProjectId=" + developerProjectId +
-                ", developerJoinDate=" + developerJoinDate +
-                '}';
-    }
-
-    private int developerId ;
-    private String developerName;
-    private int  developerCompanyId;
-    private int developerProjectId;
-    private Date developerJoinDate;
 
 
 }
