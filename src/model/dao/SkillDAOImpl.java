@@ -22,11 +22,10 @@ public class SkillDAOImpl<Skill> implements SkillDAO<Skill> {
     String sqlFindByName = "select skill_name from SKILLS where skill_name LIKE ?";
     String sqlGetAll = "select * from SKILLS";
 
-    public static void ConnectDB() throws SQLException, ClassNotFoundException {
+    public static void ConnectionToDatabase() throws SQLException, ClassNotFoundException {
         Class.forName(DRIVER);
-        connection = DriverManager.getConnection(URL, "postgres", "parafin");
-
-
+        // -Dusername = XXX -Dpassword-YYY (добавить логин и пароль в edit configurations в VM options)
+        connection = DriverManager.getConnection(URL, System.getProperty("User"), System.getProperty("Password"));
     }
 
     public static void closeConnection() throws SQLException {
@@ -37,7 +36,7 @@ public class SkillDAOImpl<Skill> implements SkillDAO<Skill> {
     @Override
     public void create(Skill skill) {
         try {
-            ConnectDB();
+            ConnectionToDatabase();
             preparedStatement = connection.prepareStatement(sqlCreate);
             preparedStatement.setString(1, skill.toString());
             preparedStatement.executeUpdate();
