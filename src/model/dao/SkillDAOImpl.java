@@ -33,6 +33,17 @@ public class SkillDAOImpl implements SkillDAO<Skill> {
         connection.close();
     }
 
+    public static void perfomPreparedStatement() throws SQLException {
+
+    }
+
+    public static ResultSet performStatement(String query) throws SQLException, ClassNotFoundException {
+        ConnectionToDatabase();
+        statement = connection.createStatement();
+        ResultSet resultSet = statement.executeQuery(query);
+        return resultSet;
+    }
+
 
     @Override
     public void create(Skill skill) {
@@ -142,10 +153,9 @@ public class SkillDAOImpl implements SkillDAO<Skill> {
         List<Skill> skills = new ArrayList<>();
         try {
             ConnectionToDatabase();
-            statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(sqlGetAll);
-            while (resultSet.next()) {
-                skills.add(new Skill(resultSet.getInt("skill_id"), resultSet.getString("skill_name")));
+            while (performStatement(sqlGetAll).next()) {
+                skills.add(new Skill(performStatement(sqlGetAll).getInt("skill_id"),
+                        performStatement(sqlGetAll).getString("skill_name")));
             }
             statement.close();
             closeConnection();
