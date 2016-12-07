@@ -141,15 +141,13 @@ public class SkillDAOImpl implements SkillDAO<Skill> {
     public List<Skill> getAll() {
         List<Skill> skills = new ArrayList<>();
         try {
-
-
             ConnectionToDatabase();
-            preparedStatement = connection.prepareStatement(sqlGetAll);
-            ResultSet resultSet = preparedStatement.executeQuery();
+            statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(sqlGetAll);
             while (resultSet.next()) {
                 skills.add(new Skill(resultSet.getInt("skill_id"), resultSet.getString("skill_name")));
             }
-            preparedStatement.close();
+            statement.close();
             closeConnection();
         } catch (SQLException e) {
             e.printStackTrace();
