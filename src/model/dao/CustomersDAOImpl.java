@@ -16,99 +16,113 @@ public class CustomersDAOImpl implements CustomersDAO<Customer> {
     private static final String DB = "jdbc:postgresql://localhost:5433/postgres";
     private static final String User = "postgres";
     private static final String Password = "19071993";
+    public static PreparedStatement preparedStatement = null;
+    public static Statement statement = null;
+    public static Connection connection = null;
+
+    static void connect() throws SQLException, ClassNotFoundException {
+        Class.forName("org.postgresql.Driver");
+        connection = DriverManager.getConnection(DB, System.getProperty(User), System.getProperty(Password));
+    }
 
 
     @Override
     public void create(Customer customer) {
         try {
-            Class.forName("org.postgresql.Driver");
-            Connection connection = DriverManager.getConnection(DB, System.getProperty(User), System.getProperty(Password));
-            PreparedStatement statement =
-                    connection.prepareStatement("INSERT into Customer VALUES (?,?)");
-
-            statement.setInt(1, customer.getCustomerId());
-            statement.setString(2, customer.getCustomerName());
-
-
-            //statement.setString(2,company.getCompanyName());
-            ResultSet resultSet = statement.executeQuery();
-
-            while (resultSet.next()) {
-
-            }
-
-
+            connect();
+            preparedStatement = connection.prepareStatement("");
+            preparedStatement.setString(1, customer.getCustomerName());
+            preparedStatement.executeUpdate();
+            preparedStatement.close();
+            connection.close();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-
     }
 
 
     @Override
     public Customer get(int id) {
         String resultName = "";
-        Customer customer=new Customer(id, resultName);
+        Customer customer = new Customer(id, resultName);
         try {
-            Class.forName("org.postgresql.Driver");
-            Connection connection =
-                    DriverManager.getConnection(DB, System.getProperty(User), System.getProperty(Password));
-            PreparedStatement statement =
-                    connection.prepareStatement("INSERT into Customer VALUES (?,?)");
-
-            statement.setInt(1, id);
-            statement.executeUpdate();
-
-
-            //statement.setString(2,company.getCompanyName());
-            ResultSet resultSet = statement.executeQuery();
-
+            connect();
+            preparedStatement = connection.prepareStatement("");
+            preparedStatement.setInt(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 id = resultSet.getInt("skill_id");
                 resultName = resultSet.getString("skill_name");
             }
-
             customer.setCustomerId(id);
             customer.setCustomerName(resultName);
+            preparedStatement.close();
             connection.close();
-            statement.close();
 
-
-
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
         } catch (SQLException e) {
             e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
         }
-        return null;
+
+        return customer;
     }
 
     @Override
     public void update(Customer customer) {
+        try {
+            connect();
+            preparedStatement = connection.prepareStatement("");
+            preparedStatement.setString(1, customer.getCustomerName());
+            preparedStatement.executeUpdate();
+            preparedStatement.close();
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
 
     }
 
     @Override
     public void delete(int id) {
         try {
-            Class.forName("org.postgresql.Driver");
-            Connection connection =
-                    DriverManager.getConnection(DB, System.getProperty(User), System.getProperty(Password));
-            PreparedStatement preparedStatement =
-                    connection.prepareStatement("DELETE from COMPANIES where companie_id  = ?  ");
-
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            connect();
+            preparedStatement = connection.prepareStatement("");
+            preparedStatement.setInt(1, id);
+            preparedStatement.executeUpdate();
+            preparedStatement.close();
+            connection.close();
         } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
     }
 
     @Override
     public String findByName(String name) {
-        return null;
+        String resultName = "";
+        try {
+            connect();
+            preparedStatement = connection.prepareStatement("");
+            preparedStatement.setString(1, name);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                resultName = resultSet.getString("customerName");
+            }
+            preparedStatement.close();
+            connection.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return resultName;
     }
 }

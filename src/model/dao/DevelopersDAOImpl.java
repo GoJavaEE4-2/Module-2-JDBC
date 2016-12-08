@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Created by Vlad on 04.12.2016.
  */
-public class DevelopersDAOImpl<Developer> implements DevelopersDAO<Developer>{
+public class DevelopersDAOImpl implements DevelopersDAO<Developer>{
     @Override
     public void create(Developer developer) {
 
