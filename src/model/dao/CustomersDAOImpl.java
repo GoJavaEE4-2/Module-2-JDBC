@@ -17,11 +17,18 @@ public class CustomersDAOImpl implements CustomersDAO<Customer> {
     private static final String User = "postgres";
     private static final String Password = "19071993";
     public static PreparedStatement preparedStatement = null;
+    public static Statement statement=null;
     public static Connection connection = null;
 
     static void connect() throws SQLException, ClassNotFoundException {
         Class.forName("org.postgresql.Driver");
         connection = DriverManager.getConnection(DB, System.getProperty(User), System.getProperty(Password));
+    }
+    public static ResultSet performStatement(String query) throws SQLException, ClassNotFoundException {
+        connect();
+        statement = connection.createStatement();
+        ResultSet resultSet = statement.executeQuery(query);
+        return resultSet;
     }
 
 
