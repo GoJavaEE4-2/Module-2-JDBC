@@ -127,28 +127,5 @@ public class DevelopersDAOImpl implements DevelopersDAO<Developer> {
         return resultName;
     }
 
-    @Override
-    public String findByFullName(String firstName, String lastName) {
-        String resultName = "";
-        try {
-            connect();
-            preparedStatement = connection.prepareStatement("SELECT * FROM DEVELOPERS" +
-                    " WHERE DEVELOPERS firstName=?? && DEVELOPERS lastName=??");
-            preparedStatement.setString(1, firstName);
-            preparedStatement.setString(2, lastName);
-            preparedStatement.executeUpdate();
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                resultName = resultSet.getString("DeveloperFirstName " + " developerLastName");
-            }
-            preparedStatement.close();
-            connection.close();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
 
-        return resultName;
-    }
 }

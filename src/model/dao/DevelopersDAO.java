@@ -9,5 +9,5 @@ import java.util.List;
  */
 public interface DevelopersDAO<Developer> extends DAO<Developer> {
     String findByName(String name);
-    String findByFullName(String firstName, String lastName);
+
 }
