@@ -15,6 +15,12 @@ import java.util.Date;
  * Created by Vlad on 04.12.2016.
  */
 public class DevelopersDAOImpl implements DevelopersDAO<Developer> {
+    private static final String DB = "jdbc:postgresql://localhost:5433/postgres";
+    private static final String User = "postgres";
+    private static final String Password = "19071993";
+    public static PreparedStatement preparedStatement = null;
+    public static Statement statement = null;
+    public static Connection connection = null;
 
     static void connect() throws SQLException, ClassNotFoundException {
         Class.forName("org.postgresql.Driver");
@@ -22,12 +28,7 @@ public class DevelopersDAOImpl implements DevelopersDAO<Developer> {
     }
 
 
-    private static final String DB = "jdbc:postgresql://localhost:5433/postgres";
-    private static final String User = "postgres";
-    private static final String Password = "19071993";
-    public static PreparedStatement preparedStatement = null;
-    public static Statement statement = null;
-    public static Connection connection = null;
+
 
     @Override
     public void create(Developer developer) {
