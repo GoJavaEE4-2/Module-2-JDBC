@@ -1,6 +1,8 @@
 package utilities;
 
-import java.io.*;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.*;
 import java.util.Properties;
 
@@ -44,6 +46,10 @@ public class ConnectionUtils {
         statement.close();
     }
 
+    public static void closePrepearedStatement() throws SQLException {
+        preparedStatement.close();
+    }
+
     public static ResultSet performStatement(String query) throws SQLException, ClassNotFoundException {
         ConnectionToDatabase(getProperties());
         statement = connection.createStatement();
@@ -51,6 +57,19 @@ public class ConnectionUtils {
         return resultSet;
     }
 
+    public static PreparedStatement performPrepearedStatement(String query) throws SQLException, ClassNotFoundException {
+        ConnectionToDatabase(getProperties());
+        preparedStatement = connection.prepareStatement(query);
+        preparedStatement.executeUpdate();
+        return preparedStatement;
+    }
+
+    public static ResultSet performPrepearedStatementQuery (String query) throws SQLException, ClassNotFoundException {
+        ConnectionToDatabase(getProperties());
+        preparedStatement = connection.prepareStatement(query);
+        ResultSet resultSet
+
+    }
 
 }
 

@@ -21,13 +21,11 @@ public class SkillDAOImpl implements SkillDAO<Skill> {
 
     @Override
     public void create(Skill skill) {
-
+PreparedStatement preparedStatement ;
         try {
             ConnectionUtils.ConnectionToDatabase(ConnectionUtils.getProperties());
-            preparedStatement = connection.prepareStatement(sqlCreate);
-            preparedStatement.setString(1, skill.getSkillName());
-            preparedStatement.executeUpdate();
-            preparedStatement.close();
+            ConnectionUtils.performPrepearedStatement(sqlCreate).setString(1, skill.getSkillName());
+            ConnectionUtils.closePrepearedStatement();
             ConnectionUtils.closeConnection();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -43,10 +41,10 @@ public class SkillDAOImpl implements SkillDAO<Skill> {
         String resultName = "";
         Skill skill = new Skill(id, resultName);
         try {
-            ConnectionToDatabase();
-            preparedStatement = connection.prepareStatement(sqlGet);
-            preparedStatement.setInt(1, id);
-            ResultSet resultSet = preparedStatement.executeQuery();
+            ConnectionUtils.ConnectionToDatabase(ConnectionUtils.getProperties());
+
+
+            ResultSet resultSet =  ConnectionUtils.performPrepearedStatement(sqlGet).setInt(1, id);
             while (resultSet.next()) {
                 id = resultSet.getInt("skill_id");
                 resultName = resultSet.getString("skill_name");
