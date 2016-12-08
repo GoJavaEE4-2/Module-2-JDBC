@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Created by Vlad on 04.12.2016.
  */
-public interface DevelopersDAO<T> extends DAO<T> {
+public interface DevelopersDAO<Developer> extends DAO<Developer> {
     String findByName(String name);
     String findByFullName(String firstName, String lastName);
 }

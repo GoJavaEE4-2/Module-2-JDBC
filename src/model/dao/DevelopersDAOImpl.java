@@ -9,30 +9,30 @@ import java.util.List;
 /**
  * Created by Vlad on 04.12.2016.
  */
-public class DevelopersDAOImpl<T> implements DevelopersDAO<T>{
+public class DevelopersDAOImpl<Developer> implements DevelopersDAO<Developer>{
     @Override
-    public void create(T t) {
+    public void create(Developer developer) {
 
     }
 
     @Override
-    public T get(int id) {
+    public Developer get(int id) {
         return null;
     }
 
     @Override
-    public void update(T t) {
+    public void update(Developer developer) {
+
+    }
+
+    @Override
+    public void delete(int id) {
 
     }
 
     @Override
     public String findByName(String name) {
         return null;
-    }
-
-    @Override
-    public void delete(int id) {
-
     }
 
     @Override
