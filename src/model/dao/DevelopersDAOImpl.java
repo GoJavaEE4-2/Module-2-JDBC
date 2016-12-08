@@ -22,8 +22,6 @@ public class DevelopersDAOImpl implements DevelopersDAO<Developer> {
     }
 
 
-
-
     private static final String DB = "jdbc:postgresql://localhost:5433/postgres";
     private static final String User = "postgres";
     private static final String Password = "19071993";
@@ -134,19 +132,19 @@ public class DevelopersDAOImpl implements DevelopersDAO<Developer> {
         String resultName = "";
         try {
             connect();
-            preparedStatement=connection.prepareStatement("SELECT * FROM DEVELOPERS" +
+            preparedStatement = connection.prepareStatement("SELECT * FROM DEVELOPERS" +
                     " WHERE DEVELOPERS firstName=?? && DEVELOPERS lastName=??");
             preparedStatement.setString(1, resultName);
             preparedStatement.executeUpdate();
-            ResultSet resultSet= preparedStatement.executeQuery();
-            while (resultSet.next()){
-                resultName= resultSet.getString("DeveloperFirstName" + "developerLastName");
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                resultName = resultSet.getString("DeveloperFirstName " + " developerLastName");
             }
             preparedStatement.close();
             connection.close();
-        }catch (ClassNotFoundException e){
+        } catch (ClassNotFoundException e) {
             e.printStackTrace();
-        }catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
 
