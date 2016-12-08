@@ -1,14 +1,14 @@
 package model.dao;
 
 import model.entities.Skill;
-
-import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
 import utilities.ConnectionUtils;
 
-public class SkillDAOImpl implements SkillDAO<Skill> {
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
+public class SkillDAOImpl implements SkillDAO<Skill> {
     String sqlStartTransaction = "START TRANSACTION";
     String commit = "COMMIT";
     String sqlCreate = "insert into skills (skill_name) VALUES (?)";
@@ -21,10 +21,8 @@ public class SkillDAOImpl implements SkillDAO<Skill> {
 
     @Override
     public void create(Skill skill) {
-PreparedStatement preparedStatement ;
         try {
-            ConnectionUtils.ConnectionToDatabase(ConnectionUtils.getProperties());
-            ConnectionUtils.performPrepearedStatement(sqlCreate).setString(1, skill.getSkillName());
+            ConnectionUtils.PrepearedStatementcreate(sqlCreate).setString(1, skill.getSkillName());
             ConnectionUtils.closePrepearedStatement();
             ConnectionUtils.closeConnection();
         } catch (SQLException e) {
@@ -36,24 +34,18 @@ PreparedStatement preparedStatement ;
 
     @Override
     public Skill get(int id) {
-
-
         String resultName = "";
         Skill skill = new Skill(id, resultName);
         try {
-            ConnectionUtils.ConnectionToDatabase(ConnectionUtils.getProperties());
-
-
-            ResultSet resultSet =  ConnectionUtils.performPrepearedStatement(sqlGet).setInt(1, id);
+            ResultSet resultSet = ConnectionUtils.PrepearedStatementGet(sqlGet, id);
             while (resultSet.next()) {
                 id = resultSet.getInt("skill_id");
                 resultName = resultSet.getString("skill_name");
             }
-
             skill.setSkillId(id);
             skill.setSkillName(resultName);
-            preparedStatement.close();
-            closeConnection();
+            ConnectionUtils.closePrepearedStatement();
+            ConnectionUtils.closeConnection();
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -67,12 +59,9 @@ PreparedStatement preparedStatement ;
     @Override
     public void update(Skill skill) {
         try {
-            ConnectionToDatabase();
-            preparedStatement = connection.prepareStatement(sqlUpdate);
-            preparedStatement.setString(1, skill.getSkillName());
-            preparedStatement.executeUpdate();
-            preparedStatement.close();
-            closeConnection();
+            ConnectionUtils.PrepearedStatementcreate(sqlUpdate).setString(1, skill.getSkillName());
+            ConnectionUtils.closePrepearedStatement();
+            ConnectionUtils.closeConnection();
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
@@ -84,12 +73,9 @@ PreparedStatement preparedStatement ;
     @Override
     public void delete(int id) {
         try {
-            ConnectionToDatabase();
-            preparedStatement = connection.prepareStatement(sqlDelete);
-            preparedStatement.setInt(1, id);
-            preparedStatement.executeUpdate();
-            preparedStatement.close();
-            closeConnection();
+            ConnectionUtils.PrepearedStatementcreate(sqlUpdate).setInt(1, id);
+            ConnectionUtils.closePrepearedStatement();
+            ConnectionUtils.closeConnection();
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
@@ -102,15 +88,12 @@ PreparedStatement preparedStatement ;
     public String findByName(String name) {
         String resultName = "";
         try {
-            ConnectionToDatabase();
-            preparedStatement = connection.prepareStatement(sqlFindByName);
-            preparedStatement.setString(1, name);
-            ResultSet resultSet = preparedStatement.executeQuery();
+           ResultSet resultSet = ConnectionUtils.PrepearedStatementFindbyName(sqlFindByName, name);
             while (resultSet.next()) {
                 resultName = resultSet.getString("skill_name");
             }
-            preparedStatement.close();
-            closeConnection();
+            ConnectionUtils.closePrepearedStatement();
+            ConnectionUtils.closeConnection();
 
         } catch (SQLException e) {
             e.printStackTrace();

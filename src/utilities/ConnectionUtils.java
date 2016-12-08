@@ -57,19 +57,36 @@ public class ConnectionUtils {
         return resultSet;
     }
 
-    public static PreparedStatement performPrepearedStatement(String query) throws SQLException, ClassNotFoundException {
+    public static PreparedStatement PrepearedStatementcreate(String create) throws SQLException, ClassNotFoundException {
         ConnectionToDatabase(getProperties());
-        preparedStatement = connection.prepareStatement(query);
+        preparedStatement = connection.prepareStatement(create);
         preparedStatement.executeUpdate();
         return preparedStatement;
     }
 
-    public static ResultSet performPrepearedStatementQuery (String query) throws SQLException, ClassNotFoundException {
+    public static ResultSet PrepearedStatementGet(String get, int id) throws SQLException, ClassNotFoundException {
         ConnectionToDatabase(getProperties());
-        preparedStatement = connection.prepareStatement(query);
-        ResultSet resultSet
-
+        preparedStatement = connection.prepareStatement(get);
+        preparedStatement.setInt(1, id);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        return resultSet;
     }
+
+    public static PreparedStatement PrepearedStatementdelete(String delete) throws SQLException, ClassNotFoundException {
+        ConnectionToDatabase(getProperties());
+        preparedStatement = connection.prepareStatement(delete);
+        preparedStatement.executeUpdate();
+        return preparedStatement;
+    }
+
+    public static ResultSet PrepearedStatementFindbyName (String FindbyName, String name) throws SQLException, ClassNotFoundException {
+        ConnectionToDatabase(getProperties());
+        preparedStatement = connection.prepareStatement(FindbyName);
+        preparedStatement.setString(1, name);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        return resultSet;
+    }
+
 
 }
 
