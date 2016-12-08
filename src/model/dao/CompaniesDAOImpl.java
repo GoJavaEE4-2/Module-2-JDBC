@@ -3,6 +3,7 @@ package model.dao;
 import model.entities.Company;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,7 +16,15 @@ public class CompaniesDAOImpl implements CompaniesDAO<Company> {
     private static final String PASS ="apppassword" ;
     private static  final String insertSql = "INSERT into Companies VALUES (?,?)";
     private static  final String selectById = "Select * from Companies where companie_id = ?";
+    private static final String deleteSql = "DELETE from COMPANIES where companie_id  = ?  ";
+    private static final String findByNameSql = "Select * from Companies where companie_name = ? ";
+    private  static final String getAllSql  = "Select * from Companies";
+    private  static final String updatetSql = "UPDATE Companies set companie_name = ? where companie_id = ?";
+
     PreparedStatement statement;
+
+
+
 
 
     @Override
@@ -75,10 +84,11 @@ public class CompaniesDAOImpl implements CompaniesDAO<Company> {
         try {
             loadDriver();
             Connection connection = connectToDB();
-            PreparedStatement statement =
-                    connection.prepareStatement("Update Companies set companie_id = ? and companie_name = ? where );
-            statement.setInt(1,id);
+            statement = connection.prepareStatement(updatetSql);
+            statement.setString(1,company.getCompanyName());
+            statement.setInt(2,company.getCompanyID());
             statement.executeUpdate();
+
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (SQLException e) {
@@ -92,8 +102,7 @@ public class CompaniesDAOImpl implements CompaniesDAO<Company> {
         try {
             loadDriver();
             Connection connection = connectToDB();
-            PreparedStatement statement =
-                    connection.prepareStatement("DELETE from COMPANIES where companie_id  = ?  ");
+            statement = connection.prepareStatement(deleteSql);
             statement.setInt(1,id);
             statement.executeUpdate();
         } catch (ClassNotFoundException e) {
@@ -105,12 +114,56 @@ public class CompaniesDAOImpl implements CompaniesDAO<Company> {
     }
 
     @Override
-    public String findByName(String name) {
-        return null;
+    public Company findByName(String name) {
+        int id;
+
+        try {
+
+            loadDriver();
+            Connection connection = connectToDB();
+            statement = connection.prepareStatement(findByNameSql);
+            statement.setString(1,name);
+
+            ResultSet resultSet = statement.executeQuery();
+
+            while(resultSet.next()){
+                id= resultSet.getInt("companie_id");
+                name = (resultSet.getString("companie_name"));
+                Company company = new Company(id,name);
+                return company;
+            }
+
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+      return null;
     }
 
     @Override
     public List<Company> getAll() {
-        return null;
+        List<Company> companies = new ArrayList<>();
+        try {
+            loadDriver();
+            Connection connection = connectToDB();
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(getAllSql);
+            while (resultSet.next()){
+            int id = resultSet.getInt("companie_id");
+             String name = resultSet.getString("companie_name") ;
+              companies.add(new Company(id,name));
+            }
+        }
+            catch (SQLException e) {
+                e.printStackTrace();
+            }
+            catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return companies;
     }
 }
