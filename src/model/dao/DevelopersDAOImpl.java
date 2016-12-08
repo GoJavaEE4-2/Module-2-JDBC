@@ -111,7 +111,7 @@ public class DevelopersDAOImpl implements DevelopersDAO<Developer> {
         try {
             connect();
             preparedStatement = connection.prepareStatement("SELECT developerName FROM DEVELOPERS WHERE developerName = ?");
-            preparedStatement.setString(1, resultName);
+            preparedStatement.setString(1, name);
             preparedStatement.executeUpdate();
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
@@ -134,7 +134,8 @@ public class DevelopersDAOImpl implements DevelopersDAO<Developer> {
             connect();
             preparedStatement = connection.prepareStatement("SELECT * FROM DEVELOPERS" +
                     " WHERE DEVELOPERS firstName=?? && DEVELOPERS lastName=??");
-            preparedStatement.setString(1, resultName);
+            preparedStatement.setString(1, firstName);
+            preparedStatement.setString(2, lastName);
             preparedStatement.executeUpdate();
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
