@@ -24,7 +24,7 @@ public class CustomersDAOImpl implements CustomersDAO<Customer> {
         Class.forName("org.postgresql.Driver");
         connection = DriverManager.getConnection(DB, System.getProperty(User), System.getProperty(Password));
     }
-    public static ResultSet performStatement(String query) throws SQLException, ClassNotFoundException {
+     static  ResultSet performStatement(String query) throws SQLException, ClassNotFoundException {
         connect();
         statement = connection.createStatement();
         ResultSet resultSet = statement.executeQuery(query);
@@ -36,7 +36,7 @@ public class CustomersDAOImpl implements CustomersDAO<Customer> {
     public void create(Customer customer) {
         try {
             connect();
-            preparedStatement = connection.prepareStatement("insert into CUSTOMERS (customerName) VALUES (?)");
+            preparedStatement = connection.prepareStatement("INSERT INTO CUSTOMERS (customerName) VALUES (?)");
             preparedStatement.setString(1, customer.getCustomerName());
             preparedStatement.executeUpdate();
             preparedStatement.close();
@@ -53,10 +53,10 @@ public class CustomersDAOImpl implements CustomersDAO<Customer> {
     @Override
     public Customer get(int id) {
         String resultName = "";
-        Customer customer = new Customer(id, resultName);
+        Customer customer =null;
         try {
             connect();
-            preparedStatement = connection.prepareStatement("select * from CUSTOMERS where customerId = ?");
+            preparedStatement = connection.prepareStatement("SELECT * FROM CUSTOMERS WHERE customerId = ?");
             preparedStatement.setInt(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
@@ -81,7 +81,7 @@ public class CustomersDAOImpl implements CustomersDAO<Customer> {
     public void update(Customer customer) {
         try {
             connect();
-            preparedStatement = connection.prepareStatement("update CUSTOMERS set customerName = ?");
+            preparedStatement = connection.prepareStatement("UPDATE CUSTOMERS SET customerName = ?");
             preparedStatement.setString(1, customer.getCustomerName());
             preparedStatement.executeUpdate();
             preparedStatement.close();
@@ -98,7 +98,7 @@ public class CustomersDAOImpl implements CustomersDAO<Customer> {
     public void delete(int id) {
         try {
             connect();
-            preparedStatement = connection.prepareStatement("delete from CUSTOMERS where customerId = ?");
+            preparedStatement = connection.prepareStatement("DELETE FROM CUSTOMERS WHERE customerId = ?");
             preparedStatement.setInt(1, id);
             preparedStatement.executeUpdate();
             preparedStatement.close();
@@ -115,7 +115,7 @@ public class CustomersDAOImpl implements CustomersDAO<Customer> {
         String resultName = "";
         try {
             connect();
-            preparedStatement = connection.prepareStatement("select customerName from CUSTOMERS where customerName = ?");
+            preparedStatement = connection.prepareStatement("SELECT customerName FROM CUSTOMERS WHERE customerName = ?");
             preparedStatement.setString(1, name);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
