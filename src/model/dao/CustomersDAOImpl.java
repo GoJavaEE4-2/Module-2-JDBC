@@ -17,7 +17,6 @@ public class CustomersDAOImpl implements CustomersDAO<Customer> {
     private static final String User = "postgres";
     private static final String Password = "19071993";
     public static PreparedStatement preparedStatement = null;
-    public static Statement statement = null;
     public static Connection connection = null;
 
     static void connect() throws SQLException, ClassNotFoundException {
@@ -54,8 +53,8 @@ public class CustomersDAOImpl implements CustomersDAO<Customer> {
             preparedStatement.setInt(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                id = resultSet.getInt("skill_id");
-                resultName = resultSet.getString("skill_name");
+                id = resultSet.getInt("");
+                resultName = resultSet.getString("");
             }
             customer.setCustomerId(id);
             customer.setCustomerName(resultName);
