@@ -21,12 +21,8 @@ public class DevelopersDAOImpl implements DevelopersDAO<Developer> {
         connection = DriverManager.getConnection(DB, System.getProperty(User), System.getProperty(Password));
     }
 
-    static ResultSet performStatement(String query) throws SQLException, ClassNotFoundException {
-        connect();
-        statement = connection.createStatement();
-        ResultSet resultSet = statement.executeQuery(query);
-        return resultSet;
-    }
+
+
 
     private static final String DB = "jdbc:postgresql://localhost:5433/postgres";
     private static final String User = "postgres";
