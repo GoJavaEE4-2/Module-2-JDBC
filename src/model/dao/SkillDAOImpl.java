@@ -5,14 +5,9 @@ import model.entities.Skill;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import utilities.ConnectionUtils;
 
 public class SkillDAOImpl implements SkillDAO<Skill> {
-
-    public static final String DRIVER = "org.postgresql.Driver";
-    public static final String URL = "jdbc:postgresql://localhost:5432/postgres";
-    public static Connection connection = null;
-    public static Statement statement = null;
-    public static PreparedStatement preparedStatement = null;
 
     String sqlStartTransaction = "START TRANSACTION";
     String commit = "COMMIT";
@@ -23,38 +18,17 @@ public class SkillDAOImpl implements SkillDAO<Skill> {
     String sqlFindByName = "select skill_name from SKILLS where skill_name = ?";
     String sqlGetAll = "select * from SKILLS";
 
-    public static void ConnectionToDatabase() throws SQLException, ClassNotFoundException {
-        Class.forName(DRIVER);
-        // -Dusername = XXX -Dpassword-YYY (добавить логин и пароль в edit configurations в VM options)
-        connection = DriverManager.getConnection(URL, System.getProperty("User"), System.getProperty("Password"));
-    }
-
-    public static void closeConnection() throws SQLException {
-        connection.close();
-    }
-
-    public static void perfomPreparedStatement() throws SQLException {
-
-    }
-
-    public static ResultSet performStatement(String query) throws SQLException, ClassNotFoundException {
-        ConnectionToDatabase();
-        statement = connection.createStatement();
-        ResultSet resultSet = statement.executeQuery(query);
-        return resultSet;
-    }
-
 
     @Override
     public void create(Skill skill) {
 
         try {
-            ConnectionToDatabase();
+            ConnectionUtils.ConnectionToDatabase(ConnectionUtils.getProperties());
             preparedStatement = connection.prepareStatement(sqlCreate);
             preparedStatement.setString(1, skill.getSkillName());
             preparedStatement.executeUpdate();
             preparedStatement.close();
-            closeConnection();
+            ConnectionUtils.closeConnection();
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
@@ -152,12 +126,12 @@ public class SkillDAOImpl implements SkillDAO<Skill> {
     public List<Skill> getAll() {
         List<Skill> skills = new ArrayList<>();
         try {
-            while (performStatement(sqlGetAll).next()) {
-                skills.add(new Skill(performStatement(sqlGetAll).getInt("skill_id"),
-                        performStatement(sqlGetAll).getString("skill_name")));
+            while (ConnectionUtils.performStatement(sqlGetAll).next()) {
+                skills.add(new Skill(ConnectionUtils.performStatement(sqlGetAll).getInt("skill_id"),
+                        ConnectionUtils.performStatement(sqlGetAll).getString("skill_name")));
             }
-            statement.close();
-            closeConnection();
+            ConnectionUtils.closeStatement();
+            ConnectionUtils.closeConnection();
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
