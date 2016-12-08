@@ -29,7 +29,7 @@ public class CustomersDAOImpl implements CustomersDAO<Customer> {
     public void create(Customer customer) {
         try {
             connect();
-            preparedStatement = connection.prepareStatement("");
+            preparedStatement = connection.prepareStatement("insert into CUSTOMERS (customerName) VALUES (?)");
             preparedStatement.setString(1, customer.getCustomerName());
             preparedStatement.executeUpdate();
             preparedStatement.close();
@@ -49,7 +49,7 @@ public class CustomersDAOImpl implements CustomersDAO<Customer> {
         Customer customer = new Customer(id, resultName);
         try {
             connect();
-            preparedStatement = connection.prepareStatement("");
+            preparedStatement = connection.prepareStatement("select * from CUSTOMERS where customerId = ?");
             preparedStatement.setInt(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
@@ -74,7 +74,7 @@ public class CustomersDAOImpl implements CustomersDAO<Customer> {
     public void update(Customer customer) {
         try {
             connect();
-            preparedStatement = connection.prepareStatement("");
+            preparedStatement = connection.prepareStatement("update CUSTOMERS set customerName = ?");
             preparedStatement.setString(1, customer.getCustomerName());
             preparedStatement.executeUpdate();
             preparedStatement.close();
@@ -91,7 +91,7 @@ public class CustomersDAOImpl implements CustomersDAO<Customer> {
     public void delete(int id) {
         try {
             connect();
-            preparedStatement = connection.prepareStatement("");
+            preparedStatement = connection.prepareStatement("delete from CUSTOMERS where customerId = ?");
             preparedStatement.setInt(1, id);
             preparedStatement.executeUpdate();
             preparedStatement.close();
@@ -108,7 +108,7 @@ public class CustomersDAOImpl implements CustomersDAO<Customer> {
         String resultName = "";
         try {
             connect();
-            preparedStatement = connection.prepareStatement("");
+            preparedStatement = connection.prepareStatement("select customerName from CUSTOMERS where customerName = ?");
             preparedStatement.setString(1, name);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
