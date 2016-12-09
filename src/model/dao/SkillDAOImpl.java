@@ -73,7 +73,7 @@ public class SkillDAOImpl implements SkillDAO<Skill> {
     @Override
     public void delete(int id) {
         try {
-            ConnectionUtils.PrepearedStatementdelete(sqlUpdate, id);
+            ConnectionUtils.PrepearedStatementdelete(sqlDelete, id);
             ConnectionUtils.closePrepearedStatement();
             ConnectionUtils.closeConnection();
         } catch (SQLException e) {
