@@ -22,7 +22,7 @@ public class SkillDAOImpl implements SkillDAO<Skill> {
     @Override
     public void create(Skill skill) {
         try {
-            ConnectionUtils.PrepearedStatementcreate(sqlCreate).setString(1, skill.getSkillName());
+            ConnectionUtils.PrepearedStatementcreate(sqlCreate, skill);
             ConnectionUtils.closePrepearedStatement();
             ConnectionUtils.closeConnection();
         } catch (SQLException e) {
@@ -59,7 +59,7 @@ public class SkillDAOImpl implements SkillDAO<Skill> {
     @Override
     public void update(Skill skill) {
         try {
-            ConnectionUtils.PrepearedStatementcreate(sqlUpdate).setString(1, skill.getSkillName());
+            ConnectionUtils.PrepearedStatementcreate(sqlUpdate, skill);
             ConnectionUtils.closePrepearedStatement();
             ConnectionUtils.closeConnection();
         } catch (SQLException e) {
@@ -73,7 +73,7 @@ public class SkillDAOImpl implements SkillDAO<Skill> {
     @Override
     public void delete(int id) {
         try {
-            ConnectionUtils.PrepearedStatementcreate(sqlUpdate).setInt(1, id);
+            ConnectionUtils.PrepearedStatementdelete(sqlUpdate, id);
             ConnectionUtils.closePrepearedStatement();
             ConnectionUtils.closeConnection();
         } catch (SQLException e) {

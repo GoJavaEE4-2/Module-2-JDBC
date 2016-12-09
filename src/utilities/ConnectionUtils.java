@@ -1,5 +1,7 @@
 package utilities;
 
+import model.entities.Skill;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -57,9 +59,10 @@ public class ConnectionUtils {
         return resultSet;
     }
 
-    public static PreparedStatement PrepearedStatementcreate(String create) throws SQLException, ClassNotFoundException {
+    public static PreparedStatement PrepearedStatementcreate(String create, Skill skill) throws SQLException, ClassNotFoundException {
         ConnectionToDatabase(getProperties());
         preparedStatement = connection.prepareStatement(create);
+        preparedStatement.setString(1, skill.getSkillName());
         preparedStatement.executeUpdate();
         return preparedStatement;
     }
@@ -72,9 +75,10 @@ public class ConnectionUtils {
         return resultSet;
     }
 
-    public static PreparedStatement PrepearedStatementdelete(String delete) throws SQLException, ClassNotFoundException {
+    public static PreparedStatement PrepearedStatementdelete(String delete, int id) throws SQLException, ClassNotFoundException {
         ConnectionToDatabase(getProperties());
         preparedStatement = connection.prepareStatement(delete);
+        preparedStatement.setInt(1, id);
         preparedStatement.executeUpdate();
         return preparedStatement;
     }
