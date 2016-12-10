@@ -1,5 +1,7 @@
 package utilities;
 
+import model.entities.Customer;
+import model.entities.Developer;
 import model.entities.Skill;
 
 import java.io.FileInputStream;
@@ -67,6 +69,23 @@ public class ConnectionUtils {
         return preparedStatement;
     }
 
+    public static PreparedStatement PrepearedStatementcreateCustomers(String create, Customer customer) throws SQLException, ClassNotFoundException {
+        ConnectionToDatabase(getProperties());
+        preparedStatement = connection.prepareStatement(create);
+        preparedStatement.setString(1, customer.getCustomerName());
+        preparedStatement.executeUpdate();
+        return preparedStatement;
+    }
+    public static PreparedStatement PrepearedStatementcreateDeveloper(String create, Developer developer) throws SQLException, ClassNotFoundException {
+        ConnectionToDatabase(getProperties());
+        preparedStatement = connection.prepareStatement(create);
+        preparedStatement.setString(1, developer.getDeveloperName());
+        preparedStatement.executeUpdate();
+        return preparedStatement;
+    }
+
+
+
     public static ResultSet PrepearedStatementGet(String get, int id) throws SQLException, ClassNotFoundException {
         ConnectionToDatabase(getProperties());
         preparedStatement = connection.prepareStatement(get);
@@ -82,6 +101,21 @@ public class ConnectionUtils {
         preparedStatement.executeUpdate();
         return preparedStatement;
     }
+    public static PreparedStatement updateCustomer(String update, Customer customer) throws SQLException, ClassNotFoundException {
+        ConnectionToDatabase(getProperties());
+        preparedStatement = connection.prepareStatement(update);
+        preparedStatement.setString(1, customer.getCustomerName());
+        preparedStatement.executeUpdate();
+        return preparedStatement;
+    }
+    public static PreparedStatement updateDeveloper(String update, Developer developer) throws SQLException, ClassNotFoundException {
+        ConnectionToDatabase(getProperties());
+        preparedStatement = connection.prepareStatement(update);
+        preparedStatement.setString(1, developer.getDeveloperName());
+        preparedStatement.executeUpdate();
+        return preparedStatement;
+    }
+
 
     public static ResultSet PrepearedStatementFindbyName (String FindbyName, String name) throws SQLException, ClassNotFoundException {
         ConnectionToDatabase(getProperties());
