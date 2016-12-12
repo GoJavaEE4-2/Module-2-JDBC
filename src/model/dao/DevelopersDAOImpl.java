@@ -4,6 +4,7 @@ package model.dao;
 import model.entities.Company;
 import model.entities.Developer;
 import model.entities.Project;
+import utilities.ConnectionUtils;
 
 import javax.management.Query;
 import java.sql.*;
@@ -33,12 +34,10 @@ public class DevelopersDAOImpl implements DevelopersDAO<Developer> {
     @Override
     public void create(Developer developer) {
         try {
+            ConnectionUtils.PrepearedStatementcreateDeveloper("INSERT INTO DEVELOPERS (developerName) VALUES (?)",  developer);
             connect();
-            preparedStatement = connection.prepareStatement("INSERT INTO DEVELOPERS (developerName) VALUES (?)");
-            preparedStatement.setString(1, developer.getDeveloperName());
-            preparedStatement.executeUpdate();
-            preparedStatement.close();
-            connection.close();
+            ConnectionUtils.closePrepearedStatement();
+            ConnectionUtils.closeConnection();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (SQLException e) {
@@ -51,14 +50,11 @@ public class DevelopersDAOImpl implements DevelopersDAO<Developer> {
         String resultName = "";
         Developer developer = null;
         try {
-            connect();
-            preparedStatement = connection.prepareStatement("SELECT*FROM DEVELOPERS WHERE id=?");
-            preparedStatement.setString(1, resultName);
-            preparedStatement.executeUpdate();
-            ResultSet resultSet = preparedStatement.executeQuery();
+            ResultSet resultSet = ConnectionUtils.PrepearedStatementGet("SELECT * FROM DEVELOPERS WHERE developerId = ?", id);
             while (resultSet.next()) {
-                resultSet.getInt("developerId");
-                resultSet.getString("developerName");
+                id = resultSet.getInt("developerId");
+                resultName = resultSet.getString("developerName");
+
             }
             developer.setDeveloperId(id);
             developer.setDeveloperName(resultName);
@@ -76,12 +72,9 @@ public class DevelopersDAOImpl implements DevelopersDAO<Developer> {
     @Override
     public void update(Developer developer) {
         try {
-            connect();
-            preparedStatement = connection.prepareStatement("UPDATE DEVELOPERS SET developerName = ?");
-            preparedStatement.setString(1, developer.getDeveloperName());
-            preparedStatement.executeUpdate();
-            preparedStatement.close();
-            connection.close();
+            ConnectionUtils.updateDeveloper("UPDATE DEVELOPERS SET developerName = ?",  developer);
+            ConnectionUtils.closePrepearedStatement();
+            ConnectionUtils.closeConnection();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (SQLException e) {
@@ -92,12 +85,9 @@ public class DevelopersDAOImpl implements DevelopersDAO<Developer> {
     @Override
     public void delete(int id) {
         try {
-            connect();
-            preparedStatement = connection.prepareStatement("DELETE * FROM DEVELOPERS WHERE developerId=?");
-            preparedStatement.setInt(1, id);
-            preparedStatement.executeUpdate();
-            preparedStatement.close();
-            connection.close();
+            ConnectionUtils.PrepearedStatementdelete("delete from DEVELOPERS where developerId = ?", id);
+            ConnectionUtils.closePrepearedStatement();
+            ConnectionUtils.closeConnection();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (SQLException e) {
@@ -110,16 +100,12 @@ public class DevelopersDAOImpl implements DevelopersDAO<Developer> {
     public String findByName(String name) {
         String resultName = "";
         try {
-            connect();
-            preparedStatement = connection.prepareStatement("SELECT developerName FROM DEVELOPERS WHERE developerName = ?");
-            preparedStatement.setString(1, name);
-            preparedStatement.executeUpdate();
-            ResultSet resultSet = preparedStatement.executeQuery();
+            ResultSet resultSet = ConnectionUtils.PrepearedStatementFindbyName("SELECT developerName FROM DEVELOPERS WHERE customerName = ?", name);
             while (resultSet.next()) {
-                resultName = resultSet.getString("developerName");
+                resultName = resultSet.getString("skill_name");
             }
-            preparedStatement.close();
-            connection.close();
+            ConnectionUtils.closePrepearedStatement();
+            ConnectionUtils.closeConnection();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (SQLException e) {

@@ -8,6 +8,7 @@ import java.util.List;
 
 import model.entities.Customer;
 import sun.security.util.Password;
+import utilities.ConnectionUtils;
 
 /**
  * Created by Vlad on 04.12.2016.
@@ -30,12 +31,9 @@ public class CustomersDAOImpl implements CustomersDAO<Customer> {
     @Override
     public void create(Customer customer) {
         try {
-            connect();
-            preparedStatement = connection.prepareStatement("INSERT INTO CUSTOMERS (customerName) VALUES (?)");
-            preparedStatement.setString(1, customer.getCustomerName());
-            preparedStatement.executeUpdate();
-            preparedStatement.close();
-            connection.close();
+            ConnectionUtils.PrepearedStatementcreateCustomers("INSERT INTO CUSTOMERS (customerName) VALUES (?)",  customer);
+            ConnectionUtils.closePrepearedStatement();
+            ConnectionUtils.closeConnection();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
 
@@ -50,13 +48,10 @@ public class CustomersDAOImpl implements CustomersDAO<Customer> {
         String resultName = "";
         Customer customer =null;
         try {
-            connect();
-            preparedStatement = connection.prepareStatement("SELECT * FROM CUSTOMERS WHERE customerId = ?");
-            preparedStatement.setInt(1, id);
-            ResultSet resultSet = preparedStatement.executeQuery();
+            ResultSet resultSet = ConnectionUtils.PrepearedStatementGet("SELECT * FROM CUSTOMERS WHERE customerId = ?", id);
             while (resultSet.next()) {
-                id = resultSet.getInt("");
-                resultName = resultSet.getString("");
+                id = resultSet.getInt("customerId");
+                resultName = resultSet.getString("customerName");
             }
             customer.setCustomerId(id);
             customer.setCustomerName(resultName);
@@ -75,12 +70,9 @@ public class CustomersDAOImpl implements CustomersDAO<Customer> {
     @Override
     public void update(Customer customer) {
         try {
-            connect();
-            preparedStatement = connection.prepareStatement("UPDATE CUSTOMERS SET customerName = ?");
-            preparedStatement.setString(1, customer.getCustomerName());
-            preparedStatement.executeUpdate();
-            preparedStatement.close();
-            connection.close();
+            ConnectionUtils.updateCustomer("UPDATE CUSTOMERS SET customerName = ?",  customer);
+            ConnectionUtils.closePrepearedStatement();
+            ConnectionUtils.closeConnection();
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
@@ -92,12 +84,9 @@ public class CustomersDAOImpl implements CustomersDAO<Customer> {
     @Override
     public void delete(int id) {
         try {
-            connect();
-            preparedStatement = connection.prepareStatement("DELETE FROM CUSTOMERS WHERE customerId = ?");
-            preparedStatement.setInt(1, id);
-            preparedStatement.executeUpdate();
-            preparedStatement.close();
-            connection.close();
+            ConnectionUtils.PrepearedStatementdelete("DELETE FROM CUSTOMERS WHERE customerId = ?", id);
+            ConnectionUtils.closePrepearedStatement();
+            ConnectionUtils.closeConnection();
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
@@ -109,15 +98,12 @@ public class CustomersDAOImpl implements CustomersDAO<Customer> {
     public String findByName(String name) {
         String resultName = "";
         try {
-            connect();
-            preparedStatement = connection.prepareStatement("SELECT customerName FROM CUSTOMERS WHERE customerName = ?");
-            preparedStatement.setString(1, name);
-            ResultSet resultSet = preparedStatement.executeQuery();
+            ResultSet resultSet = ConnectionUtils.PrepearedStatementFindbyName("SELECT customerName FROM CUSTOMERS WHERE customerName = ?", name);
             while (resultSet.next()) {
-                resultName = resultSet.getString("customerName");
+                resultName = resultSet.getString("skill_name");
             }
-            preparedStatement.close();
-            connection.close();
+            ConnectionUtils.closePrepearedStatement();
+            ConnectionUtils.closeConnection();
 
         } catch (SQLException e) {
             e.printStackTrace();
