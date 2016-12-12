@@ -70,7 +70,7 @@ public class CustomersDAOImpl implements CustomersDAO<Customer> {
     @Override
     public void update(Customer customer) {
         try {
-            ConnectionUtils.updateCustomer("UPDATE CUSTOMERS SET customerName = ?",  customer);
+            ConnectionUtils.PrepearedStatementcreateCustomers("UPDATE CUSTOMERS SET customerName = ?",  customer);
             ConnectionUtils.closePrepearedStatement();
             ConnectionUtils.closeConnection();
         } catch (SQLException e) {
