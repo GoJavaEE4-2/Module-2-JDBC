@@ -1,6 +1,6 @@
 package model.dao;
 
-import model.entities.Developer;
+
 
 import java.util.List;
 
@@ -9,5 +9,5 @@ import java.util.List;
  */
 public interface DevelopersDAO<Developer> extends DAO<Developer> {
     String findByName(String name);
-
+    public List<Developer> getAll();
 }

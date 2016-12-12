@@ -18,7 +18,7 @@ public class DevelopersDAOImpl implements DevelopersDAO<Developer> {
     @Override
     public void create(Developer developer) {
         try {
-            ConnectionUtils.PrepearedStatementcreateDeveloper("INSERT INTO DEVELOPERS (developer_name) VALUES (?)", developer);
+            ConnectionUtils.PrepearedStatementcreateDeveloper("INSERT INTO DEVELOPERS (developerName) VALUES (?)", developer);
             ConnectionUtils.closePrepearedStatement();
             ConnectionUtils.closeConnection();
         } catch (ClassNotFoundException e) {

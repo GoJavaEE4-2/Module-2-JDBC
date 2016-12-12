@@ -2,6 +2,7 @@ package utilities;
 
 import model.entities.Customer;
 import model.entities.Developer;
+import model.entities.Project;
 import model.entities.Skill;
 
 import java.io.FileInputStream;
@@ -80,6 +81,13 @@ public class ConnectionUtils {
         ConnectionToDatabase(getProperties());
         preparedStatement = connection.prepareStatement(create);
         preparedStatement.setString(1, developer.getDeveloperName());
+        preparedStatement.executeUpdate();
+        return preparedStatement;
+    }
+    public static PreparedStatement PrepearedStatementcreateProject(String create, Project project) throws SQLException, ClassNotFoundException {
+        ConnectionToDatabase(getProperties());
+        preparedStatement = connection.prepareStatement(create);
+        preparedStatement.setString(1,project.getProjectName());
         preparedStatement.executeUpdate();
         return preparedStatement;
     }
