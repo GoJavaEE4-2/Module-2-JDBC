@@ -106,10 +106,18 @@ public class SkillDAOImpl implements SkillDAO<Skill> {
     @Override
     public List<Skill> getAll() {
         List<Skill> skills = new ArrayList<>();
+        Skill skill = new Skill(0, null);
+        int id = 0;
+        String name = "";
         try {
-            while (ConnectionUtils.performStatement(sqlGetAll).next()) {
-                skills.add(new Skill(ConnectionUtils.performStatement(sqlGetAll).getInt("skill_id"),
-                        ConnectionUtils.performStatement(sqlGetAll).getString("skill_name")));
+            ResultSet resultSet = ConnectionUtils.performStatement(sqlGetAll);
+
+            while (resultSet.next()) {
+                id = resultSet.getInt("skill_id");
+                name = resultSet.getString("skill_name");
+                skill.setSkillId(id);
+                skill.setSkillName(name);
+                skills.add(skill);
             }
             ConnectionUtils.closeStatement();
             ConnectionUtils.closeConnection();
