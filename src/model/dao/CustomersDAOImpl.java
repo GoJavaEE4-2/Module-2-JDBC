@@ -46,7 +46,7 @@ public class CustomersDAOImpl implements CustomersDAO<Customer> {
     @Override
     public Customer get(int id) {
         String resultName = "";
-        Customer customer =null;
+        Customer customer =new Customer(0, null);
         try {
             ResultSet resultSet = ConnectionUtils.PrepearedStatementGet("SELECT * FROM CUSTOMERS WHERE customerId = ?", id);
             while (resultSet.next()) {
