@@ -109,20 +109,7 @@ public class ConnectionUtils {
         preparedStatement.executeUpdate();
         return preparedStatement;
     }
-    public static PreparedStatement updateCustomer(String update, Customer customer) throws SQLException, ClassNotFoundException {
-        ConnectionToDatabase(getProperties());
-        preparedStatement = connection.prepareStatement(update);
-        preparedStatement.setString(1, customer.getCustomerName());
-        preparedStatement.executeUpdate();
-        return preparedStatement;
-    }
-    public static PreparedStatement updateDeveloper(String update, Developer developer) throws SQLException, ClassNotFoundException {
-        ConnectionToDatabase(getProperties());
-        preparedStatement = connection.prepareStatement(update);
-        preparedStatement.setString(1, developer.getDeveloperName());
-        preparedStatement.executeUpdate();
-        return preparedStatement;
-    }
+
 
 
     public static ResultSet PrepearedStatementFindbyName (String FindbyName, String name) throws SQLException, ClassNotFoundException {
