@@ -15,8 +15,6 @@ import java.util.List;
 
 public class DevelopersDAOImpl implements DevelopersDAO<Developer> {
 
-    String sqlGetAll = "select * from SKILLS";
-
     @Override
     public void create(Developer developer) {
         try {
@@ -129,7 +127,7 @@ public class DevelopersDAOImpl implements DevelopersDAO<Developer> {
         int projectID = 0;
         Date date = null;
         try {
-            ResultSet resultSet = ConnectionUtils.performStatement(sqlGetAll);
+            ResultSet resultSet = ConnectionUtils.performStatement("select * from SKILLS");
             while (resultSet.next()) {
                 id = resultSet.getInt("developer_id");
                 resultName = resultSet.getString("developer_name");
