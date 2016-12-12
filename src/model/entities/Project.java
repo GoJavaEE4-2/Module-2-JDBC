@@ -25,6 +25,10 @@ public class Project {
         this.projectTimeStamp = projectTimeStamp;
     }
 
+    public Project(String projectName) {
+        this.projectName = projectName;
+    }
+
     public int getProjectId() {
         return projectId;
     }

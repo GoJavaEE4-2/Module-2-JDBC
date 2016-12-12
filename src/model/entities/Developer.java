@@ -25,6 +25,10 @@ public class Developer {
         this.developerJoinDate = developerJoinDate;
     }
 
+    public Developer(String developerName) {
+        this.developerName = developerName;
+    }
+
     @Override
     public String toString() {
         return "Developer{" +
