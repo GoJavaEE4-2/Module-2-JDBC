@@ -18,7 +18,7 @@ public class DevelopersDAOImpl implements DevelopersDAO<Developer> {
     @Override
     public void create(Developer developer) {
         try {
-            ConnectionUtils.PrepearedStatementcreateDeveloper("INSERT INTO DEVELOPERS (developerName) VALUES (?)", developer);
+            ConnectionUtils.PrepearedStatementcreateDeveloper("INSERT INTO DEVELOPERS (developer_name) VALUES (?)", developer);
             ConnectionUtils.closePrepearedStatement();
             ConnectionUtils.closeConnection();
         } catch (ClassNotFoundException e) {
@@ -39,7 +39,7 @@ public class DevelopersDAOImpl implements DevelopersDAO<Developer> {
         Date date = null;
 
         try {
-            ResultSet resultSet = ConnectionUtils.PrepearedStatementGet("SELECT*FROM DEVELOPERS WHERE id=?", id);
+            ResultSet resultSet = ConnectionUtils.PrepearedStatementGet("SELECT * FROM DEVELOPERS WHERE developer_id = ?", id);
 
             while (resultSet.next()) {
                 id = resultSet.getInt("developer_id");
@@ -72,7 +72,7 @@ public class DevelopersDAOImpl implements DevelopersDAO<Developer> {
     @Override
     public void update(Developer developer) {
         try {
-            ConnectionUtils.PrepearedStatementcreateDeveloper("UPDATE DEVELOPERS SET developerName = ?", developer);
+            ConnectionUtils.PrepearedStatementcreateDeveloper("UPDATE DEVELOPERS SET developer_name = ?", developer);
             ConnectionUtils.closePrepearedStatement();
             ConnectionUtils.closeConnection();
 
@@ -86,7 +86,7 @@ public class DevelopersDAOImpl implements DevelopersDAO<Developer> {
     @Override
     public void delete(int id) {
         try {
-            ConnectionUtils.PrepearedStatementdelete("DELETE * FROM DEVELOPERS WHERE developerId=?", id);
+            ConnectionUtils.PrepearedStatementdelete("DELETE * FROM DEVELOPERS WHERE developer_id=?", id);
             ConnectionUtils.closePrepearedStatement();
             ConnectionUtils.closeConnection();
         } catch (ClassNotFoundException e) {
@@ -101,7 +101,7 @@ public class DevelopersDAOImpl implements DevelopersDAO<Developer> {
     public String findByName(String name) {
         String resultName = "";
         try {
-            ResultSet resultSet = ConnectionUtils.PrepearedStatementFindbyName("SELECT developerName FROM DEVELOPERS WHERE developerName = ?", name);
+            ResultSet resultSet = ConnectionUtils.PrepearedStatementFindbyName("SELECT developer_name FROM DEVELOPERS WHERE developer_name = ?", name);
             while (resultSet.next()) {
                 resultName = resultSet.getString("developer_name");
             }
@@ -127,7 +127,7 @@ public class DevelopersDAOImpl implements DevelopersDAO<Developer> {
         int projectID = 0;
         Date date = null;
         try {
-            ResultSet resultSet = ConnectionUtils.performStatement("select * from SKILLS");
+            ResultSet resultSet = ConnectionUtils.performStatement("select * from DEVELOPERS");
             while (resultSet.next()) {
                 id = resultSet.getInt("developer_id");
                 resultName = resultSet.getString("developer_name");
