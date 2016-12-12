@@ -106,7 +106,7 @@ public class ProjectDAOImpl implements ProjectDAO<Project> {
         try {
             ResultSet resultSet = ConnectionUtils.PrepearedStatementFindbyName("SELECT projectName FROM PROJECTS WHERE projectName= ?", name);
             while (resultSet.next()) {
-                resultName = resultSet.getString("developer_name");
+                resultName = resultSet.getString("project_name");
             }
             ConnectionUtils.closePrepearedStatement();
             ConnectionUtils.closeConnection();
