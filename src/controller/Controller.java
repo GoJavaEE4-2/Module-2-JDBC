@@ -1,8 +1,5 @@
 package controller;
 
-import model.dao.CustomersDAOImpl;
-import model.dao.DevelopersDAOImpl;
-import model.dao.ProjectDAOImpl;
 import model.dao.SkillDAOImpl;
 import model.entities.Skill;
 import view.ConsoleDataInput;
@@ -15,8 +12,8 @@ import java.util.List;
 public class Controller {
 
     SkillDAOImpl skillDAOImpl;
-    
-    public Controller(SkillDAOImpl skillDAOImpl, ProjectDAOImpl projectDAOImpl, DevelopersDAOImpl developersDAOImpl, CustomersDAOImpl customersDAOImpl) {
+
+    public Controller(SkillDAOImpl skillDAOImpl) {
         this.skillDAOImpl = skillDAOImpl;
     }
 
